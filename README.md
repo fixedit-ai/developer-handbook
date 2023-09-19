@@ -35,6 +35,15 @@ Sometimes we do train deep learning models, but more often our clients train mod
 
 When we learn something new, we like to share that knowledge with others. It might be an internal video in our demo-channel in Slack, it might be in a [LinkedIn post on our company page](https://www.linkedin.com/company/fixedit), a [video on our public YouTube](https://www.youtube.com/@fixeditconsulting/videos), or a full course in our e-learning portal.
 
+## Constant learning
+We wake up with a smile every day knowing that today will be easier than yesterday since we have automated the boring tasks, built better tools, and improved our processes. To make the market grow, our goal is to reduce the cost for application development by 10x-100x compared to today. To reach this goal, we need to be constant learners and inventors.
+
+You will spend a lot of time experimenting, looking for better ways to do something. Your ideas are valuable, and your mind is our primary asset. Therefore, you will visit conferences, read books that you find interesting and take every opportunity to learn. When you have learned you are eager to share your knowledge both internally and with our clients.
+
+Found a boring task? Try to create a script to automate it. When the script is your daily sidekick, share it with the rest of the team. With our collaborative effort, the script will be transformed from a script to a CLI tool or a cloud service. Soon thereafter, the tool is mature enough to be added to our product catalog for our clients to use.
+
+Well done, you are now a valuable expert in our team!
+
 ## What tech stack do we use?
 Our applications are normally written in C, sometimes with a bit of C++. This is a big part of what we do, so we need to feel at home with C. Sometimes we can agree that C is a bit annoying to work with, but we have grown to love it due to the many benefits it offers. Makefiles are an old technology, but their flexibility, portability, ease of writing and other benefits makes us frequent users of them.
 
@@ -52,11 +61,23 @@ Our C and C++ code is unit tested with GTest and our Python code with PyTest. We
 
 If you like project management and project management methodologies, you will enjoy spending time in our GitHub Issues tracker where we keep most of our tickets, our Confluence wiki where we share knowledge and information and Compass where each project has its information and you can see the dependencies of each project collected in a centralized place. Of course, we are Agile, dynamic, and reflective.
 
-## Constant learning
-We wake up with a smile every day knowing that today will be easier than yesterday since we have automated the boring tasks, built better tools, and improved our processes. To make the market grow, our goal is to reduce the cost for application development by 10x-100x compared to today. To reach this goal, we need to be constant learners and inventors.
+### Deployment
+Our primary OS to work with is Linux. This is where we are experts and this is where we thrives. In some cases we do however need to deploy code to other platforms. It might be tools we create that should be usable in all the three major OSes: Windows, Linux and MacOS or it might be custom scripts we create for a client working with a specific OS. There are different approaches that we use for this, some of them explained here:
 
-You will spend a lot of time experimenting, looking for better ways to do something. Your ideas are valuable, and your mind is our primary asset. Therefore, you will visit conferences, read books that you find interesting and take every opportunity to learn. When you have learned you are eager to share your knowledge both internally and with our clients.
+#### Dockerized scripts
+The easiest way to make complex code or scripts portable is to package it in a Docker image. This can then be run independent of the OS (as long as Docker is available for the platform which is the case for both Windows, Ubuntu, and MacOS. Docker is however a complex dependency to require and there are some downsides with this approach:
+* Docker is hard to install: It is not always easy to install Docker on a computer and it is not commonly used outside the developer world. The threshold to install everything needed to run the script will therefore be high the first time.
+* Using dockerized code requires knowledge: Docker is designed for developers, the code we deploy as dockerized images requires a lot of knowledge from the user to use.
+* Docker is not free for everyone: Commercial use of Docker Desktop in larger enterprises (more than 250 employees OR more than $10 million USD in annual revenue) requires a paid subscription.
+Due to these reasons we have some guidelines:
+* Tools that should be easy to use by anyone should not depend on Docker.
+* Small scripts might be easier ported natively to other OSes as needed.
+* Developer tools that should be used by developers might assume knowledge of Docker and that Docker is installed.
 
-Found a boring task? Try to create a script to automate it. When the script is your daily sidekick, share it with the rest of the team. With our collaborative effort, the script will be transformed from a script to a CLI tool or a cloud service. Soon thereafter, the tool is mature enough to be added to our product catalog for our clients to use.
+#### Portable python code
+Python is a portable language that works well on both Windows, Linux and MacOS. Some care needs to be taken when writing Python code to make sure it is portable. Some libraries such as `deeplake[enterprise]` and `vi3o` are not supported on Windows. We also need to refrain from using platform specific interfaces or APIs.
 
-Well done, you are now a valuable expert in our team!
+Python might be hard to install and might require a lot of knowledge to use. It is therefore not always a good deployment method.
+
+#### Windows Subsystem for Linux (WSL)
+Another option to use Linux based scripts in Windows is to use [WSL](https://ubuntu.com/tutorials/install-ubuntu-on-wsl2-on-windows-10#1-overview). This can give you an Ubuntu terminal in directly in Windows where you can `apt-get install` packages.
